@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatboxComponent } from './chatbox/chatbox.component';
+import { ChatBoxComponent } from './chatbox/chatbox.component';
 
+import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes, Router } from '@angular/router';
 
 
@@ -9,9 +10,10 @@ import { RouterModule, Routes, Router } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: 'child', component: ChatboxComponent }
-    ])
+      { path: 'chat', component: ChatBoxComponent }
+    ]),
+    SharedModule
   ],
-  declarations: [ChatboxComponent]
+  declarations: [ChatBoxComponent]
 })
 export class ChatModule { }
