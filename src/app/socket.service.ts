@@ -4,7 +4,7 @@ import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap} from 'rxjs/operators';
 
 // import { toPromise } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,7 +19,7 @@ export class SocketService {
   private socket;
 
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public cookie: CookieService) {
     // connection is being created.
     // that handshake
     this.socket = io(this.url);
@@ -85,6 +85,58 @@ export class SocketService {
 
   // events to be emitted
 
+
+  
+  public markChatAsSeen = (userDetails) => {
+
+    this.socket.emit('mark-chat-as-seen', userDetails);
+
+  } // end markChatAsSeen
+
+
+
+  // end events to be emitted
+
+  // chat related methods 
+
+  
+
+  public getChat(senderId, receiverId, skip): Observable<any> {
+
+    return this.http.get(`${this.url}/api/v1/chat/get/for/user?senderId=${senderId}&receiverId=${receiverId}&skip=${skip}&authToken=${this.cookie.get('authtoken')}`)
+      .pipe(tap(data => console.log('Data Received')))
+      .pipe(catchError(this.handleError));
+
+  } // end logout function
+
+  public chatByUserId = (userId) => {
+
+    return Observable.create((observer) => {
+      
+      this.socket.on(userId, (data) => {
+
+        observer.next(data);
+
+      }); // end Socket
+
+    }); // end Observable
+
+  } // end chatByUserId
+
+  public SendChatMessage = (chatMsgObject) => {
+
+    this.socket.emit('chat-msg', chatMsgObject);
+
+  } // end getChatMessage
+
+
+  public exitSocket = () =>{
+
+
+    this.socket.disconnect();
+
+
+  }// end exit socket
 
   private handleError(err: HttpErrorResponse) {
 
