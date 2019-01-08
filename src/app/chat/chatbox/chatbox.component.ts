@@ -5,13 +5,13 @@ import { AppService } from './../../app.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
-
+import { FirstCharComponent } from '../../shared/first-char/first-char.component';
 
 @Component({
   selector: 'app-chat-box',
   templateUrl: './chatbox.component.html',
   styleUrls: ['./chatbox.component.css'],
-  providers: [SocketService]
+  providers: [SocketService],
 })
 
 export class ChatBoxComponent implements OnInit {
