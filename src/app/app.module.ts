@@ -29,7 +29,7 @@ import { LoginComponent } from './user/login/login.component';
       { path: '**', component: LoginComponent}
     ])
   ],
-  providers: [HttpClientModule,CookieService],
+  providers: [HttpClientModule, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

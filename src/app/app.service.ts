@@ -15,14 +15,14 @@ import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 export class AppService {
 
   private url = 'https://chatapi.edwisor.com';
-  constructor( public http:HttpClient, public cookieService: CookieService) { }
+  constructor( public http: HttpClient, public cookieService: CookieService) { }
 
   public getUserInfoFromLocalstorage = () => {
     return JSON.parse(localStorage.getItem('userInfo'));
   } // end getuserinfo from local storage
 
   public setUserInfoInLocalstorage = (data) => {
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    localStorage.setItem('userInfo', JSON.stringify(data));
   }
 
   public signupFunction(data): Observable<any> {
@@ -40,21 +40,21 @@ export class AppService {
   public signinFunction(data): Observable<any> {
     const params = new HttpParams()
     .set('email', data.email)
-    .set('password', data.password)
-    
+    .set('password', data.password);
+
     return this.http.post(`${this.url}/api/v1/users/login`, params);
   } // end of signin function
 
   public logout(): Observable<any> {
 
     const params = new HttpParams()
-      .set('authToken', this.cookieService.get('authtoken'))
+      .set('authToken', this.cookieService.get('authtoken'));
 
     return this.http.post(`${this.url}/api/v1/users/logout`, params);
 
   } // end logout function
 
-  
+
 
   private handleError(err: HttpErrorResponse) {
 
@@ -76,5 +76,5 @@ export class AppService {
 
   }  // END handleError
 
-  
+
 }

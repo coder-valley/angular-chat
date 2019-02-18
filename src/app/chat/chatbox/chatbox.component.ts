@@ -41,7 +41,8 @@ export class ChatBoxComponent implements OnInit {
     this.receiverName = this.cookieService.get('receiverName');
   }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
 
     this.authToken = this.cookieService.get('authtoken');
 
